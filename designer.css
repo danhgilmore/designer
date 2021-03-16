@@ -1,0 +1,116 @@
+﻿body,
+html {
+  padding: 10px;
+  margin: 20px;
+  position: relative;
+  height: 100%;
+  
+}
+.wrapper {
+	/*display: grid;*/
+	gap: 20px;
+	grid-template-areas:
+	"header"
+	"form-header"
+	"preview-header"
+	"form"
+	"width"
+	"length"
+	"thickness"
+	"pattern"
+	"preview"
+	"instructions"
+}
+.header {
+	grid-area: header;
+}
+.form-header {
+	
+	grid-area: form-header;
+	
+}
+.preview-header {
+	grid-area: preview-header;
+	
+}
+.form {
+	/*display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-area: form;*/
+	
+}
+.form-table {
+	border-collapse: collapse;
+    margin-top: .5em;
+    width: 100%;
+    clear: both;
+}
+.form label {
+	
+	padding: 10px;
+}
+
+.preview {
+	grid-area: preview;
+	
+	 padding: 10px;
+  margin: 20px;
+  background-color: #d5d5d5;
+  /* 320 512*/
+  width: 320px;
+  height: 512px;
+}
+.instructions {
+	grid-area: instructions;
+}
+
+@media (min-width: 500px) {
+	.wrapper {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-areas:
+		"header header header header"
+		"form-header form-header preview-header preview-header"
+		"form form preview preview"
+		"instructions instructions instructions instructions"
+	}
+}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
