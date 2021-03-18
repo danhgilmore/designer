@@ -6,16 +6,11 @@ html {
   height: 100%;
 }
 
-.preview {
-  grid-area: preview;
-
+#preview {
   padding: 10px;
   margin: 20px;
   background-color: #d5d5d5;
-  /* 320 512*/
   width: 320px;
   height: 512px;
 }
-.instructions {
-  grid-area: instructions;
-}
+q
