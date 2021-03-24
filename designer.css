@@ -1,15 +1,42 @@
 ﻿body,
 html {
-  padding: 10px;
-  margin: 20px;
-  position: relative;
-  height: 100%;
+  background-color: #0672a2;
+}
+.body-content {
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-#preview {
-  padding: 10px;
-  margin: 20px;
-  background-color: #d5d5d5;
-  width: 320px;
-  height: 512px;
+#header {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow-x: hidden;
+  padding: 5px;
+  position: relative;
+}
+
+#parametersContainer {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow-x: hidden;
+  padding: 5px;
+  position: relative;
+}
+
+#previewContainer {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow-x: hidden;
+  padding: 5px;
+  position: relative;
 }

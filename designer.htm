@@ -1,47 +1,115 @@
 <!doctype html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-5">
+	
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <script src="js/jQuery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	
 	<link rel="stylesheet" href="css/bootstrap.css">
-    
+	<link rel="stylesheet" href="css/bootstrap-grid.css">
+	<link rel="stylesheet" href="css/bootstrap-reboot.css">
+	<link rel="stylesheet" href="designer.css">
+	<script src="js/designer.js"></script>
+	
 </head>
 <body>
 	<div class="container">
-		<!--<div class="row">
-			<div class="col-12">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<div class="row">
+			<div id="header" class="col-12">
+				Header
+			</div> 
+		</div><!-- end div class row -->
+		
+		<div class="row">
+			<div id="parametersContainer" class="col-4">
+				<form>
+					<div class="row">
+						<div class="col-4 mb-3">
+							<label for="width" class="form-label">Width:</label>
+							<input type="number" class="form-control" id="width" name="width" value="12" step=".25" min="8" max="12.5">
+						</div>
+						<div class="col-4 mb-3">						
+							<label for="length" class="form-label">Length:</label>
+							<input type="number" class="form-control" id="length" name="length" value="16" step=".25" min="5" max="17">
+						</div>
+						<div class="col-12">
+							<label for="pattern" class="form-label">Pattern:</label>
+							<input type="text" class="form-control" id="pattern" name="pattern" value="1W 1M 1W 1M 1W 1M 1W 1M 1W 1M 1W 1M">
+						</div>
+					</div>
+				</form>
+				<div class=>
+					<p>Patterns consist of one or more blocks that have a wood type and a size. For example, "1W 1M" would represent 1in of walnut followed by 1in of maple.</p>
+					<p>Valid wood types are:</p>
+						<ul>
+							<li>(C) Cherry</li>
+							<li>(M) Maple</li>
+							<li>(P) Padauk</li>
+							<li>(PH) Purple Heart</li>
+							<li>(W) Walnut</li>
+						</ul>
+				</div>
 			</div>
-		</div>-->
+			
+			<div id="previewContainer" class="col-8">
+				<div>Preview</div>
+				<span id="widthPreviewDisplay">12</span>in x <span id="lengthPreviewDisplay">16</span>in</div>
+				<div id="preview" class="container">
+					
+				</div>
+				
+			</div>
+		</div>
+		
+	</div><!-- end div class container -->
+		
+		
+		
+		
+		<!--
+			<div class="col-sm-4">
+				<div class="paramSection measurements">
+					<div class="col-12">
+						<label for="pattern">Pattern:</label>
+						<input type="text" id="pattern" name="pattern" value="1W 1M 1W 1M 1W 1M 1W 1M 1W 1M 1W 1M">
+					</div>
+					<div>
+						
+					</div>
+				</div>
+			
+
+			<div class="col-sm-8">
+				<div class="previewSection title">
+					Preview
+				
+					A x B x C
+				</div>
+			</div>
+		
+		</div>
+		
 		<div class="row">
 			<div class="col-6">Parameters</div>
 			<div class="col-6">Preview</div>
 		</div>
-		
-		
-		
-		<!-- <div class="row row-cols-3">
+		<div class="row row-cols-3">
 			<div class="col"><label for="width">W:</label><input type="number" id="width" name="width" value="12" step=".25" min="8" max="12.5"></div>
 			<div class="col"><label for="length">L:</label><input type="number" id="length" name="length" value="16" step=".25" min="5" max="17"></div>
 			<div class="col"><label for="thickness">T:</label><input type="number" id="thickness" name="thickness" value="1" step=".25" min=".75" max="1.5"></div>
 			<div class="col" id="preview">sdfsdf</div>
 		</div>
 		<div class="row">
-			<div class="col-4"><label for="pattern">Pattern:</label><input type="text" id="pattern" name="pattern"></div>
-			<div class="col"><input type="submit" value="Submit"></div>  
+			
+			<div class="col"><input type="submit" value="Submit"></div>	
 		</div>
 		-->
 		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </div>
-	</div><!-- end div class container -->
-	<script src="js/jquery.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
