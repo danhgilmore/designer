@@ -44,7 +44,7 @@
 					</div>
 				</form>
 				<div class=>
-					<p>Patterns consist of one or more blocks that have a wood type and a size. For example, "1W 1M" would represent 1in of walnut followed by 1in of maple.</p>
+					<!--<p>Patterns consist of one or more blocks that have a wood type and a size. For example, "1W 1M" would represent 1in of walnut followed by 1in of maple.</p>
 					<p>Valid wood types are:</p>
 						<ul>
 							<li>(C) Cherry</li>
@@ -52,14 +52,17 @@
 							<li>(P) Padauk</li>
 							<li>(PH) Purple Heart</li>
 							<li>(W) Walnut</li>
-						</ul>
+						</ul>-->
 				</div>
 			</div>
 			
 			<div id="previewContainer" class="col-8">
 				<div>Preview</div>
-				<span id="widthPreviewDisplay">12</span>in x <span id="lengthPreviewDisplay">16</span>in</div>
+				<span id="widthPreviewDisplay">12</span>in x <span id="lengthPreviewDisplay">16</span>in
 				<div id="preview" class="container">
+					<canvas id="previewCanvas" width="500" height="300">
+						Your browser does not support HTML5 Canvas.
+					</canvas>
 					
 				</div>
 				
@@ -83,7 +86,6 @@
 					</div>
 				</div>
 			
-
 			<div class="col-sm-8">
 				<div class="previewSection title">
 					Preview
