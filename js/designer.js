@@ -24,10 +24,16 @@ function eventWindowLoaded() {
 	canvasApp( customDesign );
 };
 
-function canvasApp( ) {
-    let pattern = customDesign.pattern;
+function canvasApp( customDesign ) {
+    
+	if ( customDesign == null ) {
+		// TODO: Add error code here
+		alert( 'customDesign is null' );
+	}
+	
+	let pattern = customDesign.pattern;
     let patternArray = pattern.split(" ");
-    let arrayLength = patternArray.length;
+    let numStrips = patternArray.length;
     
 	let theCanvas = document.getElementById("previewCanvas");
 	let context = theCanvas.getContext("2d");
@@ -36,29 +42,65 @@ function canvasApp( ) {
 
 	function drawBoardDesign( ) {
 
-		context.fillStyle = "#dfdede";
-		context.fillRect(0,0, 500, 300);
-		
+		let rectWidth = 300;
+		let rectLength = 500;
+				
 		let imgCherry = new Image();
 		let imgMaple = new Image();
 		let imgPadauk = new Image();
 		let imgPurpleHeart = new Image();
 		let imgWalnut = new Image();
 		
+		context.fillStyle = "#dfdede";
+		context.fillRect(0,0, rectLength, rectWidth);
+		
 		imgCherry.src = "img/cherry-vertical.jpg";
 		imgMaple.src = "img/maple-vertical.jpg";
 		imgPadauk.src = "img/padauk-vertical.jpg";
 		imgPurpleHeart.src = "img/purpleheart-vertical.jpg";
 		imgWalnut.src = "img/walnut-vertical.jpg";
+		
+		patternArray.forEach( myFunction );
 
-		for (var i = 0; i < arrayLength; i++ ) {
-            //console.log( patternArray[i]);
+		function myFunction( value, index, array ) {
+			let stripWidth = patternArray[index].charAt(0);
+            let stripSpecies = patternArray[index].charAt(1);
+			
+			
+			
+			//console.log( value + ' ' + index + ' ' +  array);
+		}
+		/*
+		for (var i = 0; i < numStrips; i++ ) {
             let measurement = patternArray[i].charAt(0);
             let species = patternArray[i].charAt(1);
+			
+			switch (species) {
+				case 'C':
+				console.log(species);
+					
+					break;
+				case 'M':
+				console.log(species);
+					
+					break;
+				case 'P':
+				console.log(species);
+					
+					break;
+				case 'PH':
+				console.log(species);
+					
+					break;
+				case 'W':
+				console.log(species);
+					
+					break;
+			}
         }
-
+*/
 		imgWalnut.onload = function() {
-			context.drawImage(imgWalnut, 0, 0, 500, 350/12);
+			context.drawImage(imgWalnut, 0, 0, 500, 350/numStrips);
 		};
 		
 	}	
