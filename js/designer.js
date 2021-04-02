@@ -1,3 +1,7 @@
+( function ( $ ) {
+    // Expressions
+} )( jQuery );
+
 import BoardDesign from "./BoardDesign.js";
 
 let customDesign = new BoardDesign(
@@ -10,19 +14,56 @@ let customDesign = new BoardDesign(
 
 window.addEventListener("load", eventWindowLoaded, false);
 
-let Debugger = function() { };
 
-Debugger.log = function(message) {
-	try {
-		console.log(message);
-	} catch (exception) {
+function eventWindowLoaded() {
+	//canvasApp( customDesign );
+};
+
+function loader( images, thingToDo, allDone) {
+	if (!images) {
 		return;
+	}
+	
+	if ("undefined" === images.length ) {
+		// convert single item 
+		images = images[images];
+	}
+
+	var count = images.length;
+	
+	let thingToDoCompleted = function (images, i) {
+		count--;
+		if ( 0 == count ) {
+			allDone(images);
+		}
+	};
+	
+	for (let i = 0; i < images.length; i++ ) {
+		thingToDo(images, i, thingToDoCompleted);
 	}
 }
 
-function eventWindowLoaded() {
+function loadImage( images, i, onComplete) {
+	let onLoad = function (e) {
+		e.target.removeEventListener("load", onLoad);
+		onComplete(images, i);
+	}
+	let img = new Image();
+	img.addEventListener("load", onLoad, false);
+	img.src = images[i];
+}
+
+
+let images = ["img/cherry-vertical.jpg",
+	"img/maple-vertical.jpg",
+	"img/padauk-vertical.jpg",
+	"img/purpleheart-vertical.jpg",
+	"img/walnut-vertical.jpg"];
+	
+loader( images, loadImage, function () {
+	
 	canvasApp( customDesign );
-};
+});	
 
 function canvasApp( customDesign ) {
     
@@ -31,6 +72,7 @@ function canvasApp( customDesign ) {
 		alert( 'customDesign is null' );
 	}
 	
+	/*
 	let pattern = customDesign.pattern;
     let patternArray = pattern.split(" ");
     let numStrips = patternArray.length;
@@ -38,86 +80,42 @@ function canvasApp( customDesign ) {
 	let theCanvas = document.getElementById("previewCanvas");
 	let context = theCanvas.getContext("2d");
 
-	Debugger.log("Drawing Board Design");
-
-	function drawBoardDesign( ) {
-
-		let rectWidth = 300;
-		let rectLength = 500;
-				
-		let imgCherry = new Image();
-		let imgMaple = new Image();
-		let imgPadauk = new Image();
-		let imgPurpleHeart = new Image();
-		let imgWalnut = new Image();
+	let rectWidth = 300;
+	let rectLength = 500;
+	
+	let imgCherry = new Image();
+	let imgMaple = new Image();
+	let imgPadauk = new Image();
+	let imgPurpleHeart = new Image();
+	let imgWalnut = new Image();
+	
+	context.fillStyle = "#dfdede";
+	context.fillRect(0,0, rectLength, rectWidth);
+	
+	imgCherry.src = "img/cherry-vertical.jpg";
+	imgMaple.src = "img/maple-vertical.jpg";
+	imgPadauk.src = "img/padauk-vertical.jpg";
+	imgPurpleHeart.src = "img/purpleheart-vertical.jpg";
+	imgWalnut.src = "img/walnut-vertical.jpg";
+	
+	imgWalnut.onload = function() {
 		
-		context.fillStyle = "#dfdede";
-		context.fillRect(0,0, rectLength, rectWidth);
-		
-		imgCherry.src = "img/cherry-vertical.jpg";
-		imgMaple.src = "img/maple-vertical.jpg";
-		imgPadauk.src = "img/padauk-vertical.jpg";
-		imgPurpleHeart.src = "img/purpleheart-vertical.jpg";
-		imgWalnut.src = "img/walnut-vertical.jpg";
-		
-		patternArray.forEach( myFunction );
-
-		function myFunction( value, index, array ) {
-			let stripWidth = patternArray[index].charAt(0);
-            let stripSpecies = patternArray[index].charAt(1);
-			
-			
-			
-			//console.log( value + ' ' + index + ' ' +  array);
-		}
-		/*
-		for (var i = 0; i < numStrips; i++ ) {
-            let measurement = patternArray[i].charAt(0);
-            let species = patternArray[i].charAt(1);
-			
-			switch (species) {
-				case 'C':
-				console.log(species);
-					
-					break;
-				case 'M':
-				console.log(species);
-					
-					break;
-				case 'P':
-				console.log(species);
-					
-					break;
-				case 'PH':
-				console.log(species);
-					
-					break;
-				case 'W':
-				console.log(species);
-					
-					break;
-			}
-        }
-*/
-		imgWalnut.onload = function() {
-			context.drawImage(imgWalnut, 0, 0, 500, 350/numStrips);
-		};
-		
-	}	
-	drawBoardDesign();
+		context.drawImage(imgWalnut, 0, 0, 500, 350/numStrips);
+	};
+	*/
 }
 
-jQuery(document).ready( function (){
+$(document).ready( function (){
 
-    /*jQuery('#width').on('change', function() {
-        jQuery('#widthPreviewDisplay').html(jQuery('#width').val());
+    /*$('#width').on('change', function() {
+        $('#widthPreviewDisplay').html($('#width').val());
     });
 
-    jQuery('#length').on('change', function() {
-        jQuery('#lengthPreviewDisplay').html(jQuery('#length').val());
+    $('#length').on('change', function() {
+        $('#lengthPreviewDisplay').html($('#length').val());
     });
 */
-    let pattern = jQuery('#pattern').val();
+    let pattern = $('#pattern').val();
     let patternArray = pattern.split(" ");
     let arrayLength = patternArray.length;
     
@@ -125,7 +123,9 @@ jQuery(document).ready( function (){
 	
 	//TODO: Add validation functionality here. Pattern must be [0-9][A-Z][" "] (AlphaNumber then space)'
 	//      This can be done with the keypress & paste events
-	jQuery("#pattern").change(function(event) {
+	$("#pattern").change(function(event) {
 		
 	});
 });
+
+
