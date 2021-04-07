@@ -1,131 +1,96 @@
-( function ( $ ) {
-    // Expressions
-} )( jQuery );
-
-import BoardDesign from "./BoardDesign.js";
-
-let customDesign = new BoardDesign(
-	12,
-	16,
-	"1W 1M 1W 1M 1W 1M 1W 1M 1W 1M 1W 1M",
-	false,
-	false
-);
-
-window.addEventListener("load", eventWindowLoaded, false);
+const IMAGE_COUNT = 5;	
 
 
-function eventWindowLoaded() {
-	//canvasApp( customDesign );
-};
+function imageLoaded( i ) {
+	if (i >= IMAGE_COUNT-1 ) {
+		drawPattern( );
+	}
+}
 
-function loader( images, thingToDo, allDone) {
+function loadImages( images ) {
+	
 	if (!images) {
 		return;
 	}
 	
 	if ("undefined" === images.length ) {
 		// convert single item 
-		images = images[images];
+		images = [images];
 	}
-
-	var count = images.length;
 	
-	let thingToDoCompleted = function (images, i) {
-		count--;
-		if ( 0 == count ) {
-			allDone(images);
-		}
-	};
+	let imgCount = images.length;
 	
-	for (let i = 0; i < images.length; i++ ) {
-		thingToDo(images, i, thingToDoCompleted);
-	}
+	for ( let i = 0; i < imgCount; i++ ) {
+		
+		let img = new Image();
+		img.src = images[i][2];
+		console.log(img.src);
+		img.onload = imageLoaded( i );
+	}	
 }
 
-function loadImage( images, i, onComplete) {
-	let onLoad = function (e) {
-		e.target.removeEventListener("load", onLoad);
-		onComplete(images, i);
-	}
-	let img = new Image();
-	img.addEventListener("load", onLoad, false);
-	img.src = images[i];
-}
-
-
-let images = ["img/cherry-vertical.jpg",
-	"img/maple-vertical.jpg",
-	"img/padauk-vertical.jpg",
-	"img/purpleheart-vertical.jpg",
-	"img/walnut-vertical.jpg"];
-	
-loader( images, loadImage, function () {
-	
-	canvasApp( customDesign );
-});	
-
-function canvasApp( customDesign ) {
-    
-	if ( customDesign == null ) {
-		// TODO: Add error code here
-		alert( 'customDesign is null' );
-	}
-	
-	/*
-	let pattern = customDesign.pattern;
+function drawPattern() {
+	console.log(images[1]);
+	let pattern = $('#pattern').val(); // 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP
     let patternArray = pattern.split(" ");
     let numStrips = patternArray.length;
-    
+	
 	let theCanvas = document.getElementById("previewCanvas");
 	let context = theCanvas.getContext("2d");
 
-	let rectWidth = 300;
+	let rectWidth = 350;
 	let rectLength = 500;
-	
-	let imgCherry = new Image();
-	let imgMaple = new Image();
-	let imgPadauk = new Image();
-	let imgPurpleHeart = new Image();
-	let imgWalnut = new Image();
 	
 	context.fillStyle = "#dfdede";
 	context.fillRect(0,0, rectLength, rectWidth);
 	
-	imgCherry.src = "img/cherry-vertical.jpg";
-	imgMaple.src = "img/maple-vertical.jpg";
-	imgPadauk.src = "img/padauk-vertical.jpg";
-	imgPurpleHeart.src = "img/purpleheart-vertical.jpg";
-	imgWalnut.src = "img/walnut-vertical.jpg";
-	
-	imgWalnut.onload = function() {
+	//let stripWidth = strip.replace(/[A-Z]/g, '');
+
+	let strip = '';
+	// for each strip, draw it in the canvas
+	for ( strip of patternArray ) {
+		let stripWidth = Number(strip.replace(/[^0-9\.]+/g, ''));
+		let stripSpecies = strip.replace(/[0-9\.]/g, '');
 		
-		context.drawImage(imgWalnut, 0, 0, 500, 350/numStrips);
-	};
-	*/
+		/*switch (stripSpecies) {
+				case 'C':
+					context.drawImage(images[0], 0,0, rectLength, rectWidth/numStrips );			
+					
+					break;
+				case 'M':
+				context.drawImage(images[1], 0,0, rectLength, rectWidth/numStrips );
+					
+					break;
+				case 'P':
+				context.drawImage(images[2], 0,0, rectLength, rectWidth/numStrips );
+					
+					break;
+				case 'PH':
+				context.drawImage(images[3], 0,0, rectLength, rectWidth/numStrips );
+					
+					break;
+				case 'W':
+				context.drawImage(images[4], 0,0, rectLength, rectWidth/numStrips );
+					
+					break;
+			}
+			*/
+	}
+	
+	//context.drawImage(images[1], 0, 0);
+	
 }
 
-$(document).ready( function (){
+let images = [
+		["C", "cherry", "img/cherry-vertical.jpg"],
+		["MP", "maple", "img/maple-vertical.jpg"],
+		["P", "padauk", "img/padauk-vertical.jpg"],
+		["PH", "purpleheart", "img/purpleheart-vertical.jpg"],
+		["W", "walnut", "img/walnut-vertical.jpg"]
+	];
 
-    /*$('#width').on('change', function() {
-        $('#widthPreviewDisplay').html($('#width').val());
-    });
 
-    $('#length').on('change', function() {
-        $('#lengthPreviewDisplay').html($('#length').val());
-    });
-*/
-    let pattern = $('#pattern').val();
-    let patternArray = pattern.split(" ");
-    let arrayLength = patternArray.length;
-    
-	
-	
-	//TODO: Add validation functionality here. Pattern must be [0-9][A-Z][" "] (AlphaNumber then space)'
-	//      This can be done with the keypress & paste events
-	$("#pattern").change(function(event) {
-		
-	});
-});
+
+loadImages( images );
 
 
