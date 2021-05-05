@@ -1,4 +1,4 @@
-const IMAGE_COUNT = 5;	
+/*const IMAGE_COUNT = 5;	
 
 
 function imageLoaded( i ) {
@@ -26,59 +26,80 @@ function loadImages( images ) {
 		img.src = images[i][2];
 		console.log(img.src);
 		img.onload = imageLoaded( i );
-	}	
-}
+	}
 
+
+	
+}*/
+
+$(document).ready( function() {
+	console.log("ready");
+});
+	/*
+	context.drawImage(imgMaple, 0,0, 500, 350/12);
+	context.drawImage(imgWalnut, 0,29.16666666, 500, 350/12);
+	context.drawImage(imgMaple, 0,58.3333333333333, 500, 350/12  );
+	context.drawImage(imgWalnut, 0, 87.4999999999, 500, 350/12  );
+*/
 function drawPattern() {
-	console.log(images[1]);
+	
 	let pattern = $('#pattern').val(); // 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP
-    let patternArray = pattern.split(" ");
-    let numStrips = patternArray.length;
+    let patternArray = pattern.split(" ");  // ["1W", "1MP",...]
+    let numStrips = patternArray.length; 
 	
 	let theCanvas = document.getElementById("previewCanvas");
 	let context = theCanvas.getContext("2d");
-
-	let rectWidth = 350;
-	let rectLength = 500;
+	let stripQuarters = boardWidth/0.25; // This is the number of quarter inch objects in the board
+	console.log('quarters = ' + stripQuarters);
 	
 	context.fillStyle = "#dfdede";
-	context.fillRect(0,0, rectLength, rectWidth);
+	context.fillRect(0,0, theCanvas.width, theCanvas.height);  // 300 400
 	
-	//let stripWidth = strip.replace(/[A-Z]/g, '');
-
+	let imgSpecies = '';
+	let dx = 0;  // Starting X axis pixel 
+	let dy = 0;  // Starting Y axis pixel...this will always be 0 because it draws from the top of the canvas down.
+	let dWidth = 0;
 	let strip = '';
-	// for each strip, draw it in the canvas
-	for ( strip of patternArray ) {
-		let stripWidth = Number(strip.replace(/[^0-9\.]+/g, ''));
-		let stripSpecies = strip.replace(/[0-9\.]/g, '');
+	
+	// for each strip, divide it into quarters.
+	for ( var i = 0; i < numStrips; i++ ) {
+		let canvasStrip = patternArray[i];
 		
-		/*switch (stripSpecies) {
+		let stripWidth = Number(canvasStrip.replace(/[^0-9\.]+/g, ''));   // i.e., 1
+		let stripSpecies = canvasStrip.replace(/[0-9\.]/g, '');		    // i.e., W
+		stripSpecies = stripSpecies.toUpperCase();
+		
+		// We will draw strips in 1/4" strips, to accommodate the 1/4" interval available for width
+		stripQuarters = stripWidth / 0.25;  // 1 inch = 4 quarters
+		// For each quarter inch of the strip, draw it on the canvas
+		for ( var j = 0; j < stripQuarters; j++ ) {
+			switch (stripSpecies) {
 				case 'C':
-					context.drawImage(images[0], 0,0, rectLength, rectWidth/numStrips );			
-					
+					imgSpecies = imgCherry;
 					break;
-				case 'M':
-				context.drawImage(images[1], 0,0, rectLength, rectWidth/numStrips );
-					
+				case 'MP':
+					imgSpecies= imgMaple;				
 					break;
 				case 'P':
-				context.drawImage(images[2], 0,0, rectLength, rectWidth/numStrips );
-					
+					imgSpecies = imgPadauk;
 					break;
 				case 'PH':
-				context.drawImage(images[3], 0,0, rectLength, rectWidth/numStrips );
-					
+					imgSpecies = imgPurpleHeart;
 					break;
 				case 'W':
-				context.drawImage(images[4], 0,0, rectLength, rectWidth/numStrips );
-					
+					imgSpecies = imgWalnut;				
 					break;
 			}
-			*/
+		// How did I determine this value?!?!?
+		dWidth = 6.25;
+		
+		// Draw the image on the canvas
+		context.drawImage(imgSpecies, dx, dy, dWidth, theCanvas.height) ;
+		dx = dx + dWidth;
+			
+		}
 	}
-	
-	//context.drawImage(images[1], 0, 0);
-	
+
 }
 
 let images = [
@@ -89,8 +110,28 @@ let images = [
 		["W", "walnut", "img/walnut-vertical.jpg"]
 	];
 
+let imgCherry = new Image();
+let imgMaple = new Image();
+let imgPadauk = new Image();
+let imgPurpleHeart = new Image();
+let imgWalnut = new Image();
+
+let boardWidth = $('#width').val();
+let boardLength = $('#length').val();
+console.log('Board width = ' + boardWidth);
+console.log('Board length = ' + boardLength);
+
+imgCherry.src = "img/cherry-vertical.jpg";
+imgMaple.src = "img/maple-vertical.jpg";
+imgPadauk.src = "img/padauk-vertical.jpg";
+imgPurpleHeart.src = "img/purpleheart-vertical.jpg";
+imgWalnut.src = "img/walnut-vertical.jpg";
+
+imgCherry.onload = function() {
+	drawPattern();
+}
+
+//loadImages( images );
 
 
-loadImages( images );
-
-
+//drawPattern();
