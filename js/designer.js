@@ -93,3 +93,11 @@ imgCherry.onload = function() {
 jQuery('#pattern').on( 'input propertychange paste', function() {
 	drawPattern();
 });
+
+jQuery('#width').on('input propertychange paste', function() {
+	jQuery('#widthPreviewDisplay').text(jQuery('#width').val());
+});
+
+jQuery('#length').on('input propertychange paste', function() {
+	jQuery('#lengthPreviewDisplay').text(jQuery('#length').val());
+});
