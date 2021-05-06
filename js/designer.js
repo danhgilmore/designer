@@ -1,46 +1,7 @@
-/*const IMAGE_COUNT = 5;	
-
-
-function imageLoaded( i ) {
-	if (i >= IMAGE_COUNT-1 ) {
-		drawPattern( );
-	}
-}
-
-function loadImages( images ) {
-	
-	if (!images) {
-		return;
-	}
-	
-	if ("undefined" === images.length ) {
-		// convert single item 
-		images = [images];
-	}
-	
-	let imgCount = images.length;
-	
-	for ( let i = 0; i < imgCount; i++ ) {
-		
-		let img = new Image();
-		img.src = images[i][2];
-		console.log(img.src);
-		img.onload = imageLoaded( i );
-	}
-
-
-	
-}*/
-
 $(document).ready( function() {
 	console.log("ready");
 });
-	/*
-	context.drawImage(imgMaple, 0,0, 500, 350/12);
-	context.drawImage(imgWalnut, 0,29.16666666, 500, 350/12);
-	context.drawImage(imgMaple, 0,58.3333333333333, 500, 350/12  );
-	context.drawImage(imgWalnut, 0, 87.4999999999, 500, 350/12  );
-*/
+	
 function drawPattern() {
 	
 	let pattern = $('#pattern').val(); // 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP 1W 1MP
@@ -90,16 +51,14 @@ function drawPattern() {
 					imgSpecies = imgWalnut;				
 					break;
 			}
-		// How did I determine this value?!?!?
-		dWidth = 6.25;
-		
-		// Draw the image on the canvas
-		context.drawImage(imgSpecies, dx, dy, dWidth, theCanvas.height) ;
-		dx = dx + dWidth;
+			// How did I determine this value?!?!?
+			dWidth = 6.25;
 			
+			// Draw the image on the canvas
+			context.drawImage(imgSpecies, dx, dy, dWidth, theCanvas.height) ;
+			dx = dx + dWidth;
 		}
 	}
-
 }
 
 let images = [
@@ -131,7 +90,6 @@ imgCherry.onload = function() {
 	drawPattern();
 }
 
-//loadImages( images );
-
-
-//drawPattern();
+jQuery('#pattern').on( 'input propertychange paste', function() {
+	drawPattern();
+});
